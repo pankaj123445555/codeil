@@ -1,0 +1,123 @@
+
+     
+        <link rel ="stylesheet" href ="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    
+        <section>
+            <div id="image">
+           <img src="/image/laptop-girl.jfif">
+            </div>
+            <div id="input-section">
+                <div><h1>Login Form</h1></div>
+                <div id="two-button">
+                 <div id="toggle"> </div>
+                     <div id="login"><button class="tgle-btn" type="button">Login</button></div>
+                     <div id="register"><button class="tgle-btn" type="button">Register</button></div>
+                </div>
+                <div class="forms">
+                    <form action="/user/create-Session" method="POST">
+                <div class  ="form">
+                   
+                 <div class ="user-name">
+                 <span>Email</span>
+                 <span><input class ="input-bar" type="email" name="email" ></span>
+                 </div>
+                 <div class ="password">
+                    <span>password</span>
+                    <span><input class ="input-bar" type="text" name="password" ></span>
+                    </div>
+                    <div class ="remember">
+                        <span><input type="checkbox"></span>
+                        <span>remember me</span>
+                    </div>
+                  <div class ="sign-in-button">
+                   <button class ="input-bar" type="submit">sign in</button>
+                  </div>
+                 
+                </div>
+            </form>
+                <!-- add another form  -->
+                <form action="/user/create" method="POST"> 
+                <div class ="another-form">
+                    <!-- this is the name section -->
+                    <div class ="user-name">
+                        <span>Name</span>
+                        <span><input class ="input-bar" type="name" name="name" ></span>
+                        </div>
+                    <!-- end of the name section -->
+                    <div class ="user-name">
+                    <span>Email</span>
+                    <span><input class ="input-bar" type="email" name="email" ></span>
+                    </div>
+                    <div class ="password">
+                       <span>password</span>
+                       <span><input class ="input-bar" type="text" name="password" ></span>
+                       </div>
+                       <!-- adding confirm password -->
+                       <div class ="password">
+                        <span> confirm password</span>
+                        <span><input class ="input-bar" type="text" name="confirmpassword" ></span>
+                        </div>
+                       <!-- ending confirm password -->
+
+                       <div class ="remember">
+                           <span><input type="checkbox"></span>
+                           <span>remember me</span>
+                       </div>
+                     <div class ="sign-in-button">
+                      <button class ="input-bar" type="submit">sign in</button>
+                     </div>
+                   </div>
+                   </form>
+                <!-- end another form -->
+                </div>
+                <div id="social-icon">
+                    <div id="social-heading"><span>login with social media</span></div>
+                    <div id="all-icon">
+                        <span><i class="fab fa-facebook"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                        <span><i class="fab fa-instagram"></i></span>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    
+    <script>
+        var l = true;
+        var r = false;
+        var login = document.getElementById('login');
+        var register = document.getElementById('register');
+        var form = document.getElementsByClassName('form');
+        var another = document.getElementsByClassName('another-form');
+        var toggle = document.getElementById('toggle');
+        register.addEventListener('click',function(){
+             if(r==true)
+             {
+                 return;
+             }
+             console.log('pankaj');
+            form[0].style.left = '-300px';
+            another[0].style.left = '0px';
+            toggle.style.left = '50%';
+            toggle.style.right = '0px';
+            r=true;
+            l=false;
+        });
+        login.addEventListener('click',function(){
+             if(l==true)
+             {
+                 return;
+             }
+             console.log('pankaj');
+            form[0].style.left = '0px';
+            another[0].style.left = '300px';
+            toggle.style.right = '50%';
+            toggle.style.left = '0px';
+            r=false;
+            l = true;
+        });
+    </script>
+    </html>
+    

@@ -1,0 +1,250 @@
+.nav-bar
+{
+    width: 98%;
+    height: 74px;
+    // background-color: red;
+    border: 1px solid black;
+    background-color: #af57578c;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#menu-icon
+{
+    display: none;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+// #menu-icon i
+// {
+//     color: white;
+//     font-size: 30px;
+// }
+// #menu-icon i:hover
+// {
+//     color: red;
+// }
+// starting of the loggo section
+.logo-image-content
+{
+    width: 170px;
+    display: flex;
+    justify-content: space-between;
+}
+.logo-img
+{
+    width: 60px;
+    height: 60px;
+}
+.logo-img img
+{
+    width: 100%;
+    height: 100%;
+}
+.lets-chat
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Chat
+{
+    font-size: 19px;
+    /* font-style: initial; */
+    font-weight: bold;
+    color: red;
+    font-family: sans-serif;
+}
+// startting of the icon and sign in section
+.icon-sign-in
+{
+    display: flex;
+    width: 450px;
+    justify-content: space-between;
+}
+.all-icon
+{
+    display: flex;
+    justify-content: space-around;
+    width: 150px;
+}
+.all-icon i
+{
+    font-size: 27px;
+}
+.fb:hover
+{
+    color: blue;
+    border-bottom: 1px solid red;
+}
+.insta:hover
+{
+    color:pink;
+    border-bottom: 1px solid red;
+}
+.twtr:hover
+{
+    color:blue;
+    border-bottom: 1px solid red;
+}
+// sign in and the sign out section
+.signin-out
+{
+    display: flex;
+    width: 250px;
+    justify-content: space-around;
+}
+.user-name
+{
+    display: flex;
+    flex-direction: column;
+}
+.sign-in
+{
+    display: flex;
+    // flex-direction: column;
+}
+// starting of the sign out
+.sign-out
+{
+    display: flex;
+}
+// design sign and sign out icon
+.sign-in-icon i
+{
+    font-size: 25px;
+}
+.sign-out-icon i
+{
+    font-size: 25px;
+}
+.sign-in-name
+{
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: crimson;
+}
+.sign-out-name
+{
+    font-size: 20px;
+    margin-left: 10px;
+    font-family: sans-serif;
+    color: crimson;
+}
+.sign-in-icon i:hover
+{
+    color: red;
+}
+.sign-out-icon:hover
+{
+    color: red;
+}
+
+// adding css to the user clicked menu bar
+.menubar-content-768px
+{
+    width: 200px;
+    height: 130px;
+    border: 1px solid black;
+    background-color: black;
+    position:absolute;
+    display: none;
+}
+.menu-bar-content
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* inside menu bar column content */
+.menu-col-content
+{
+    width: 100%;
+    height: 30px;
+    border-bottom: 2px solid white ;
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+.menu-col-icon i
+{
+    color: white;
+    font-size: 20px;
+}
+.menu-col-name
+{
+    color: white;
+   font-size: 15px;
+}
+.menu-social-icon
+{
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    border-bottom: 1px solid white;
+    justify-content: space-between;
+}
+.social-media-name
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.social-media-name span
+{
+    color: white;
+}
+.menu-all-icon
+{
+    display: flex;
+    justify-content: space-around;
+}
+.fb-color
+{
+    color: blue;
+    font-size: 25px;
+}
+.insta-color
+{
+    color:pink;
+    font-size: 25px;
+}
+.twtr-color
+{
+    color: blue;
+    font-size: 25px;
+}
+/* section of the delete icon */
+.delete-icon
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.delete-icon span i
+{
+    color: red;
+}
+// end of the user clicked menu-bar
+
+// adding media query to the page
+@media screen and (max-width:768px){
+    #menu-icon
+    {
+        display: block;
+    }
+    .icon-sign-in
+    {
+        display: none;
+    }
+    .nav-bar
+    {
+        justify-content: center;
+    }
+}

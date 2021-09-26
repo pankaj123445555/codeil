@@ -1,0 +1,91 @@
+<link rel="stylesheet" type="text/css" href="/css/headers.css">
+<div class="nav-bar">
+  <div id ="menu-icon">
+    <i class="fas fa-bars"></i>
+<!-- when user clicked on it shows the menu-bar -->
+<div class="menubar-content-768px" data-val ="false">
+  <div class="menu-bar-content">
+     <!-- this is the sign in section -->
+     <div class="menu-col-content">
+       <span class="menu-col-name">Sign-in</span>
+       <span class="menu-col-icon"> <a href="/user/signin"><i class="fas fa-sign-in-alt"></i></a></span>
+       
+    </div>
+     <!-- end of the sign in section -->
+      <!-- startting of the sign out section -->
+      <div class="menu-col-content">
+       <span class="menu-col-name">Sign-out</span>
+       <span class="menu-col-icon"><a href="/user/sign-out"><i class="fas fa-sign-out-alt"></i></a></span>
+       
+    </div>
+      <!-- end of the sign out section -->
+      <!-- social media account -->
+      <div class="menu-social-icon">
+          <div class="social-media-name"><span>Social-media</span></div>
+       <div class = "menu-all-icon">
+           <i class="fab fa-facebook-f fb-color"></i>
+           <i class="fab fa-instagram insta-color"></i>
+           <i class="fab fa-twitter twtr-color"></i>
+         </div>
+
+       </div>
+       <!-- start delete-icon -->
+       <div class="delete-icon">
+        <span><i class="fas fa-backspace"></i></span>
+       </div>
+       <!-- end delete icon -->
+      </div>
+  </div>
+</div>
+<!-- end of showed menu-bar -->
+   <!-- </div> -->
+  <!-- starting the logo section -->
+  <div class ="logo-image-content">
+    <div class = logo-img>
+      <img src="/image/bubble-chat.png">
+   </div>
+   <div class="lets-chat">
+     <span class="Chat">Codial</span>
+     <span class="Chat">Let's Chat</span>
+   </div>
+    </div>
+  <!-- ending of the logo section -->
+  <!-- starting of the sign in and sign out -->
+  <div class="icon-sign-in">
+    <div class = "all-icon">
+      <i class="fab fa-facebook-f fb"></i>
+      <i class="fab fa-instagram insta"></i>
+      <i class="fab fa-twitter twtr"></i>
+    </div>
+    <div class="signin-out">
+      <!-- this is the sign in section -->
+        <% if(locals.user){%>
+          
+          <div class="user-name">
+            <span class="contact-icon"><i class="fas fa-address-book"></i></span>
+            <span><%=user.name%></span>
+         </div>
+          <%}else{%>
+            
+            <div class="sign-in ">
+              <span class="sign-in-icon"><a href="/user/signin"><i class="fas fa-sign-in-alt"></i></a></span>
+              <span class="sign-in-name">Sign-in</span>
+           </div>
+            <%}%>
+                  <!-- end of the sign in section -->
+                  <!-- startting of the sign out section -->
+            <div class="sign-out">
+              <span class="sign-out-icon"><a href="/user/sign-out"><i class="fas fa-sign-out-alt"></i></a></span>
+              <span class="sign-out-name">Sign-out</span>
+            </div>
+        <!-- ending of the sign out section -->
+    </div>
+    </div>
+    </div>
+    <!-- ending of the sign in and sign out -->
+    <!-- end of the header section -->
+    <script src="/js/headeress.js">
+
+    </script>
+    
+    

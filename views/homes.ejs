@@ -1,0 +1,39 @@
+
+
+
+<!-- abhi yaha pe problem yah hai ki jisko bhi thodi bahut html aati hai vah edit as html mai jaa kar post create kar ke data-base mai save kar sakta hai -->
+
+
+<!-- if user is not logged in then he is not able post something -->
+<!-- ya he may see the post -->
+<% if(locals.user){%>
+<div id="feed-post">
+<form action="/posts/create" id="new-post-form" method="POST">
+    <h1>enter the comment and post</h1>
+    <textarea name="content" cols="30" rows="10" required></textarea>
+    <input type="submit" value="Post">
+    
+</form>
+<%}%>
+ 
+<!-- any user can see the post -->
+</div>
+
+    <div id="posts-container">
+        <ul>
+            <%for(post of posts){%>
+    
+    
+                <li><%= post%></li>
+                <!-- <li><%= post.user%></li> -->
+                
+            <%}%>
+        </ul>
+    </div>
+    
+    
+
+
+
+
+   
