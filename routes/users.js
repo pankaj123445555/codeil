@@ -10,14 +10,37 @@ const user_contoller = require('../controllers/user_controller');
 router.get('/signin',user_contoller.signin); 
  router.get('/signup',user_contoller.signup); 
 
-router.get('/profile',passport.checkAuthentication,user_contoller.profile);
+router.get('/profile/:id',passport.checkAuthentication,user_contoller.profile);
 
 //  finally hamara form yaha jaayega
 router.post('/create',user_contoller.create);
+// ending the create section
+
+// setting up the google authentication function
+
+// scope is just pass for fetching the information
+router.get('/auth/google',passport.authenticate('google',{scope: ['profile','email']}));
+router.get('/auth/google/callback',passport.authenticate('google',{failureRedirect: '/user/signin'}),user_contoller.createSession);
+// ending up the google auhtentication function
+
+
+// router for updating the profile
+
+router.post('/update/:id',user_contoller.update);
+
+
+// ending of router for updating the profile
+
+
+
+
+
+
+
 
 // adding the sign in page
 // use passposrt as a middleware
-router.post('/create-Session',passport.authenticate(   //doubt hai
+router.post('/create-Session',passport.authenticate(   
     'local',
     {failureRedirect: '/user/signin'},
 ),user_contoller.createSession);

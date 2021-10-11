@@ -1,39 +1,107 @@
-
-
-
 <!-- abhi yaha pe problem yah hai ki jisko bhi thodi bahut html aati hai vah edit as html mai jaa kar post create kar ke data-base mai save kar sakta hai -->
 
 
 <!-- if user is not logged in then he is not able post something -->
 <!-- ya he may see the post -->
 <% if(locals.user){%>
-<div id="feed-post">
-<form action="/posts/create" id="new-post-form" method="POST">
-    <h1>enter the comment and post</h1>
-    <textarea name="content" cols="30" rows="10" required></textarea>
-    <input type="submit" value="Post">
-    
-</form>
-<%}%>
- 
-<!-- any user can see the post -->
-</div>
+    <div id="feed-post">
+        <form action="/posts/create" id="new-post-form" method="POST">
+            <h1>enter the comment and post</h1>
+            <textarea name="content" cols="30" rows="10" required></textarea>
+            <input type="submit" value="Post">
+
+        </form>
+        <%}%>
+
+            <!-- any user can see the post -->
+    </div>
 
     <div id="posts-container">
         <ul>
             <%for(post of posts){%>
-    
-    
-                <li><%= post%></li>
-                <!-- <li><%= post.user%></li> -->
+
                 
-            <%}%>
+                    <li id="post-<%=post._id %>">
+                        <p>
+                        <% if(locals.user&&(locals.user.id==post.user.id)){%>
+                            <small>
+                                <a class="delete-post-btn" href="/posts/destroy/<%= post._id %>"><button type="button">delete</button></a>
+                            </small>
+                            
+                            <%}%>
+                       
+                        <!-- <%= post.content%> -->
+                         
+                            <%= post.content%>
+                         
+                        
+                        
+                         
+                        
+                     
+                        </p>
+               
+                <!-- adding the comment section -->
+                <div class="comment-container">
+                    <% if(locals.user){%>
+
+                        <form action="/comment/create" id ="new-comment-form" method="POST">
+                            <input name="content" type="text" placeholder="write a comment">
+                            <input type="hidden" name="post" value="<%=post._id%>">
+                            <input type="submit" value="add">
+                        </form>
+
+                        <%}%>
+                </div>
+
+                <!-- ending the comment section -->
+                <!-- load the cooment and show the comment -->
+                <div class="post-comment-list">
+                    <ul class="post-comment-<%=post._id%>">
+                        <% for(comment of post.comments){%>
+
+                            <!-- show the comment -->
+                              <% if(locals.user&&(locals.user.id==comment.user.id)){%>
+                                
+                                <small>
+                                    <a href="/comment/destroy/<%= comment.id %>"><button type="button">delete</button></a>
+                                </small>
+                                <%}%>
+                                
+                                
+                                
+                            <!-- end of showing the comment -->
+                            <li>
+                                <%= comment.content%>
+                                
+                            </li>
+                            <%}%>
+
+                    </ul>
+                </div>
+                    </li>
+                
+                <!-- end of loading the comment -->
+
+                <%}%>
         </ul>
     </div>
     
-    
+    <!-- we have to put all the user profile here check in the home controller how to send all the user in the homes.ejs -->
+    <div id="all_user">
+      <h1>friends forever</h1>
+      <ul>
+          
+            <!-- iterate over all the user -->
+            <% for(user of all_user){%>
+                
+                <li>   <a href="/user/profile/<%= user.id%>"><%= user.name%> </a>  </li>
+                <%}%>
+      </ul>
+    </div>
+    <!-- ending of the showed friend in the list when the user is sign in it must be present in the list -->
+    <!-- starting of the jquery script tag -->
+    <script src="/js/home_post.js">
 
-
-
-
-   
+    </script>
+    <!-- ending of the jquery script tag -->

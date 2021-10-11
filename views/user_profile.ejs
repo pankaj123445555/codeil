@@ -3,6 +3,24 @@
 
 <link rel="stylesheet" href="/css/user_profile.css">
 <h1>finally it shows the profile and layouts</h1>
-<h1><%=user.email %></h1>
-<h1><%= user.password%></h1>
+<h1><%=  users.name  %></h1>
+<h1><%= users.email%></h1>
 <h1><button type="submit">log-out</button></h1>
+
+<img src="<%= users.avatar %>" alt="image not found" width="100">
+
+<!-- now its time to update the profile current logged in user can update their profile -->
+<%  if(user.id==users.id){%>
+    
+    <form action="/user/update/<%= users.id %>" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" value="<%= users.name%>">
+        <input type="email" name="email" value="<%=users.email%>">
+        <input type="file" name="avatar" placeholder="profile Picture">
+        <button type="submit">update</button>
+      </form>
+    
+    <%}%>
+
+
+<!-- here there is two user one is user current logged in user and and second one users which we send from the controller -->
+<!-- ending of update the profile -->

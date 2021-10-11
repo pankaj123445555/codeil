@@ -9,5 +9,6 @@ const home_contoller = require('../controllers/home_controller');
 router.get('/',home_contoller.home); 
 router.use('/user',require('./users'));
 router.use('/posts',require('./posts'));
- 
+router.use('/comment',require('./comment'));
+ router.use('/api',require('./api'));
 module.exports = router;

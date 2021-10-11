@@ -1,4 +1,7 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
+
 
 // adding sign in page
 module.exports.signin = function(req,res)
@@ -21,21 +24,36 @@ module.exports.signup = function(req,res)
 
 
 // adding progile page
-module.exports.profile = function(req,res)
-{
-    if(req.cookies.userid)
-    {
-      User.findById(req.cookies.userid,function(err,user){
-         if(err)
-         {
-             console.log('error in finding the cookie',err);
-             return;
-         }
-         return res.render('user_profile',{ footerhidden: true, headerhidden: true,title: "understand a layout"});
-      });
-    }
+// module.exports.profile = function(req,res)
+// {
+//     if(req.cookies.userid)
+//     {
+//       User.findById(req.cookies.userid,function(err,user){
+//          if(err)
+//          {
+//              console.log('error in finding the cookie',err);
+//              return;
+//          }
+//          return res.render('user_profile',{ footerhidden: true, headerhidden: true,title: "understand a layout"});
+//       });
+//     }
+//     User.findById(req.params.id, function(err,user){
+//         if(err)
+//         {
+//             console.log('error in finding the user in profile page',err);
+//             return;
+//         }
+//         else
+//         {
+//             console.log('finally it finds the user');
+//            console.log(user);
+//            return;  
+//         }
+//     });
+//     console.log(req.params.id);
+//     return res.render('user_profile',{ footerhidden: true, headerhidden: true,title: "understand a layout"});
     
-}
+// }
  
 
 
@@ -65,7 +83,7 @@ module.exports.profile = function(req,res)
 //                 console.log('password is not matched');
 //                 return res.redirect('back');
 //             }
-//        }
+//        } 
 //        else{
 //         return res.redirect('back');
 //        }
@@ -115,22 +133,111 @@ module.exports.create = function(req,res){
 // end of the sign in page
 
 
-// sign in and create session for the user
-module.exports.createSession = function(req,res)
-{
 
-    
-    res.redirect('/');
-}
+
+
+
+
 module.exports.profile = function(req,res)
 {
     
-
-     return res.render('user_profile',{ footerhidden: true, headerhidden: true,title: "understand a layout"});
+    User.findById(req.params.id,function(err,user){
+        if(err)
+        {
+            console.log('error in finding the user by req.params',err);
+            return;
+        }
+        else
+        {
+            return res.render('user_profile',{ users:user, footerhidden: true, headerhidden: false,title: "understand a layout"});
+        }
+    });
+     
 }
+
+
+
+// here the controller used for the updating the profile
+
+module.exports.update = async function(req,res)
+{
+    let user =  await User.findByIdAndUpdate(req.params.id)
+    //  User.findByIdAndUpdate(req.params.id,{name:req.body.name,email: req.body.email},function(err,user){
+
+    //    if(err)
+    //    {
+    //        console.log('error in updating the profile',err);
+    //        return;
+    //    }
+    //     return res.redirect('back');
+
+    //  });
+    if(req.user.id == req.params.id)
+    {
+        try{
+            let user =  await User.findByIdAndUpdate(req.params.id);
+             
+            User.uploadedAvatar(req,res,function(err){
+                if(err)
+                {
+                    console.log('error in mttler',err);
+                    return;
+                }
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if(req.file)
+                {
+                    if(user.avatar)
+                    {
+                        fs.unlinkSync(path.join(__dirname,'..',user.avatar));
+                    }
+                }
+                 
+                if(req.file)
+                {
+                    user.avatar = User.avatarPath + '/' +req.file.filename;
+                }
+                
+                user.save();
+                return res.redirect('back');
+            })
+
+
+        }catch(err){
+            return res.redirect('back');
+        }
+    }
+    else
+    {
+        return res.status(401).send('unauthorised');
+    }
+}
+
+
+
+// ending of updating the profile
+
+
+// sign in and create session for the user
+module.exports.createSession = function(req,res)
+{
+    // we used it in the middleware
+    req.flash('success','logged in successfully');
+    // end it of middleware
+    res.redirect('/');
+}
+// ending the sign in page
+
+
+
+
 // creating sign out controller
 module.exports.destroySession = function(req,res)
 {
     req.logout();
+    // used it in the middleware
+    req.flash('success','logged out successfully');
+    // end it in the middleware
+
     res.redirect('/');
 }

@@ -12,14 +12,19 @@ const db = require('./config/mongoose');
 const session = require('express-session')
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+// require the passport-jwt-strategy
+const passportJwt = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2');
+
 const MongoStore = require('connect-mongo')(session);
 // including scss module
 const sassMiddleware = require('node-sass-middleware');
 
-// adding cookie
-
-
-// ending the cookie
+// adding flash library 
+const flash = require('connect-flash');
+const customMiddleware = require('./config/middleware');
+// ending flash libraray
+ 
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -36,6 +41,9 @@ app.use(cookieParser());
 
 // use the assets folder
 app.use(express.static('./assets'));
+// join the path
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 app.use(expresslayouts);
 // niche vali property jo css jod rahe hai usko header mai rakh degi
 app.set('layout extractStyles',true);
@@ -56,11 +64,23 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000*60*100)
-    }
+    },
+    store: new MongoStore({
+        mongooseConnection : db,
+        autoRemove: 'disable'
+    }, function(err){
+        console.log('error in connecting to mongo store'||'connect mongodb server setup completed')
+    })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+
+
+// using flash this using session cookie
+app.use(flash());
+app.use(customMiddleware.createflash);
+// end
 
 app.use('/',require('./routes/index'));
 
