@@ -7,52 +7,48 @@
     <title>
         pankaj
     </title>
-    <!-- link for the animated flash message -->
+    
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"> </script>
 
     
-<!-- end of the flash animated  -->
+ 
 
 
- <!-- starting of the ajax link -->
+  
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 
  </script>
- <!-- end of the ajax link -->
+  
 
 
     <link rel="stylesheet" href="/css/layout.css">
     
     <link rel ="stylesheet" href ="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" type="text/css" href="/css/headers.css"> -->
+    
     <%- style %>
 </head>
 <body>
-    <!-- this is the header part -->
+    
     <%if(!headerhidden){%>
 
         <%-include('_header');%>
         <%}%>
-        <!-- ending of the header part -->
+        
       
  
    
-      <!-- this is the body part -->
+       
 
      <%- body %>
-     <!-- end of the body part -->
-
-     <!-- this is the fotter part -->
+      
      <%if(!footerhidden){%>
 
         <%-include('_footer');%>
         <%}%>
-        <!-- ending of the footer part -->
         
-        <!-- adding the flash message -->
         <script>
-        // this is for the success message
+         
           <% if(flash.success && flash.success.length>0) {%>
             
             new Noty({
@@ -64,9 +60,7 @@
          
          }).show();
             <%}%>
-            // ending the success message
-
-            // this is for the showing the error in the flash message
+             
             <% if(flash.error && flash.error.length>0) {%>
             
             new Noty({
@@ -78,10 +72,10 @@
          
          }).show();
             <%}%>
-            // end of the error flash message
+             
 
         </script>
         
-        <!-- ending the flash message -->
+         
 </body>
 </html>

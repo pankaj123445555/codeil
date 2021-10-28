@@ -1,0 +1,108 @@
+ 
+    <link rel="stylesheet" type="text/css" href="/css/user_profile.css">
+    <link rel ="stylesheet" href ="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+ 
+    <div class="main">
+     <div class="user-profile">
+         <div class="user-image"><img src="<%=users.avatar%>"></div>
+         <div class="user-profile-div"><a class="color" href="#"><%= users.name%></a></div>
+         <div  class="user-profile-div"><a class="color" href="/user/update-page/<%= users.id %>">update-Profile</a></div>
+         <div class="user-profile-div"><a class="color" href="#">Work</a></div>
+         <div  class="user-profile-div"><a class="color" href="#">Support</a></div>
+         <div class="user-profile-div"><a class="color" href="#">Setting</a></div>
+         <div  class="user-profile-div"><a class="color" href="#">SignOut</a></div>
+         <div class="user-profile-div social-icon">
+             <span class="fb"> <a><i class="fab fa-facebook-f"></i></a></span>
+             <span class="google"><a><i class="fab fa-google"></i></a></span>
+             <span class="insta"><a><i class="fab fa-instagram"></i></a></span>
+         </div>
+     </div>
+     <!-- now this is the main content section -->
+     <div class="content">
+         <!-- this is the user info -->
+         <div class="user-info">
+             <div class="about"><span>About</span></div>
+             <div class="user-info-details">
+                 <span>name :</span>
+                 <span><%= users.name%></span>
+                </div>
+             <div  class="user-info-details">
+                 <span>email :</span>
+                 <span><%= users.email%></span>
+             </div>
+             <div  class="user-info-details">
+                 <span>phone :</span>
+                 <span>9630464787</span>
+             </div>
+             <div   class="user-info-details">
+                 <span>Adress : </span>
+                 <span>ala umrod shajapur (m.p)</span>
+             </div>
+         </div>
+         <!-- this is the user friend -->
+     </div>
+    </div>
+
+
+    <!-- this is for the post for a specific user --> 
+    <div class="specific-post"> 
+    <% for(let post of users.posts)  {%>
+        <div class="post-container">
+            <div class="specific-user-profile">
+                
+                <a href="/user/profile/<%= post.user.id%>"><img src="<%= post.user.avatar%>"></a> 
+                <div>
+                <p><%= post.user.name %></p>
+                 <span><%=post.createdAt %></span>
+                 </div>
+                 </div>
+                 <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab libero aliquid repudiandae praesentium ratione eius, minima cum! Magni, optio! Corrupti laudantium aliquid sequi. Reiciendis sequi optio maiores voluptatem ea odio.</p>
+                 <img src= "<%= post.avatar %>" class="post-img">
+                 <div class="like-comment">
+                    <span class="likes-icon">
+                        <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id%>&type=Post">
+                            <i class="fas fa-thumbs-up"></i> <%= post.likes.length %> likes</a>
+                    </span>
+                  
+                    <% if(locals.user){%>
+                        <span class="comment-form-input">  
+                        <form action="/comment/create" id ="new-comment-form" method="POST">
+                            <input class="comment-input" name="content" type="text" placeholder="write a comment">
+                            <input type="hidden" name="post" value="<%=post._id%>">
+                             <button class="add-comment" type="submit">add</button>
+                        </form>
+                    </span>
+                        <%}%>
+                  
+                 </div>
+                 <% for(let comment of post.comments) {%>
+                 <div class="show-comment" id="comment-<%=comment._id %>">
+                     <div class="comment-user-profile">
+                       <span><img src="<%= comment.user.avatar %>"></span>
+                     </div> 
+                   <div class="comment-user-content">
+                     <span class="comment-user-name"><%= comment.user.name%></span>
+                     <span><%= comment.content %></span>
+                   </div>
+                   <div class="comment-delete-btn">
+                       <% if(locals.user && user.id == comment.user.id) {%>
+                        
+                        <a href="/comment/destroy/<%=comment._id%>"><button>delete</button></a>
+                        <%}%>
+                   
+                   </div>
+                 </div>
+                 <%}%>
+                 
+                 <% if(locals.user && user.id==post.user.id) {%>
+                 <div class="delete-post-btn" id="delete-post-<%=post._id %>">
+                 <a href="/posts/destroy/<%=post._id%>"><i class="fas fa-times"></i></a>
+                 </div>
+                 <%}%>
+        </div>
+        <%}%>
+    </div>
+     <!--end of the specific post  -->
+        
+ 

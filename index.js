@@ -24,7 +24,18 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const customMiddleware = require('./config/middleware');
 // ending flash libraray
+const bodyParser = require('body-parser');
  
+
+
+
+
+// adding up the chat-box
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_socket').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server is listening on port 5000');
+// ending up the chat-box
 
 app.use(sassMiddleware({
     src: './assets/scss',
@@ -34,6 +45,13 @@ app.use(sassMiddleware({
     prefix: '/css'
 }));
 app.use(express.urlencoded());
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+ 
+
 app.use(cookieParser());
 
 
@@ -43,6 +61,7 @@ app.use(cookieParser());
 app.use(express.static('./assets'));
 // join the path
 app.use('/uploads',express.static(__dirname + '/uploads'));
+ 
 
 app.use(expresslayouts);
 // niche vali property jo css jod rahe hai usko header mai rakh degi

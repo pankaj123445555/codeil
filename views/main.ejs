@@ -1,0 +1,241 @@
+
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel ="stylesheet" href ="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+<div class="container">
+    <!-- this is the left side bar -->
+<div class="left-sidebar">
+    <div class="imp-link">
+        <a href="#"><i class="far fa-newspaper"></i> Latest News</a>
+        <a href="#"><i class="fas fa-user-friends"></i> Friends</a>
+        <a href="/add-friends"><i class="fas fa-users"></i> Add-Friends</a>
+        <a href="#"><i class="fas fa-cart-plus"></i> marketplace</a>
+        <a href="#"><i class="fab fa-youtube"></i> watch</a>
+        <a href="#">See More</a>
+    </div>
+    
+</div>
+<!-- this is the main content -->
+
+
+
+
+<div class="main-content">
+    <!-- start of the story gallery -->
+    <div class="story-gallery">
+        <!-- first story -->
+     <div class="story story1">
+        <i class="fas fa-plus"></i>
+       <p>Post story</p>
+     </div>
+     <!-- second story -->
+     <div class="story story2">
+         <img src="/images/zayn-malik.jpg">
+       <p>Post story</p>
+     </div>
+     <!-- third story -->
+     <div class="story story3">
+        <img src="/images/rashmika-madana.jpg">
+       <p>Post story</p>
+     </div>
+     <!-- fourth story -->
+     <div class="story story4">
+        <img src="/images/rashmika-madana.jpg">
+       <p>Post story</p>
+     </div>
+     <!-- fifth story -->
+     <div class="story story5">
+        <img src="/images/babe1.jfif">
+       <p>Post story</p>
+     </div>
+    </div>
+    <!-- end of the story gallery -->
+    <% if(locals.user) {%>
+    <div class="write-post-container">
+        <div class="user-profile">
+            <a href="/user/profile/<%= user.id%>"><img src= <%= user.avatar %>></a>
+       <div>
+       <p><%= user.name %></p>
+        <small>public</small>
+        </div>
+        </div>
+       <form action="/posts/create" id="new-post-form" method="POST" enctype="multipart/form-data">
+        <div class="post-input-container">
+            <textarea rows="3" placeholder="whats on your mind pankaj giri" name = "content" ></textarea>
+           </div>
+           <div class="post-submit-btn">
+            <span id="file-input-button-span1"><input type="file" name="avatars" placeholder="profile Picture" ></span>
+            <span><button id="post-button" type="submit" >Post</button></span>
+           </div>
+        </form>
+    </div>
+ 
+    <%}%>
+    <!-- end of the write post container -->
+     <% for(let post of posts)  {%>
+    <div class="post-container">
+        <div class="user-profile">
+            
+            <a href="/user/profile/<%= post.user.id%>"><img src="<%= post.user.avatar%>"></a> 
+            <div>
+            <p><%= post.user.name %></p>
+             <span><%=post.createdAt %></span>
+             </div>
+             </div>
+             <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab libero aliquid repudiandae praesentium ratione eius, minima cum! Magni, optio! Corrupti laudantium aliquid sequi. Reiciendis sequi optio maiores voluptatem ea odio.</p>
+             <img src= "<%= post.avatar %>" class="post-img">
+             <div class="like-comment">
+                <span class="likes-icon">
+                    <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id%>&type=Post">
+                        <i class="fas fa-thumbs-up"></i> <%= post.likes.length %> likes</a>
+                </span>
+              
+                <% if(locals.user){%>
+                    <span class="comment-form-input">  
+                    <form action="/comment/create" id ="new-comment-form" method="POST">
+                        <input class="comment-input" name="content" type="text" placeholder="write a comment">
+                        <input type="hidden" name="post" value="<%=post._id%>">
+                         <button class="add-comment" type="submit">add</button>
+                    </form>
+                </span>
+                    <%}%>
+              
+             </div>
+             <% for(let comment of post.comments) {%>
+             <div class="show-comment" id="comment-<%=comment._id %>">
+                 <div class="comment-user-profile">
+                   <span><img src="<%= comment.user.avatar %>"></span>
+                 </div> 
+               <div class="comment-user-content">
+                 <span class="comment-user-name"><%= comment.user.name%></span>
+                 <span><%= comment.content %></span>
+               </div>
+               <div class="comment-delete-btn">
+                   <% if(locals.user && user.id == comment.user.id) {%>
+                    
+                    <a href="/comment/destroy/<%=comment._id%>"><button>delete</button></a>
+                    <%}%>
+               
+               </div>
+             </div>
+             <%}%>
+             
+             <% if(locals.user && user.id==post.user.id) {%>
+             <div class="delete-post-btn" id="delete-post-<%=post._id %>">
+             <a href="/posts/destroy/<%=post._id%>"><i class="fas fa-times"></i></a>
+             </div>
+             <%}%>
+    </div>
+    <%}%>
+
+</div>
+ 
+
+
+
+
+
+<!-- this is the right side bar -->
+<div class="right-sidebar">
+    <div class="sidebar-title">
+        <h4>Event</h4>
+        <a href="#">See All</a>
+    </div>
+        <div class="event">
+            <div class="left-event">
+                <h3>18</h3>
+                <span>March</span>
+            </div>
+            <div class="right-event">
+                <h4>Social Media</h4>
+                <p>Willson Tech Park</p>
+                <a href="#">More Info</a>
+            </div>
+        </div>
+        <!-- start -->
+        <div class="event">
+            <div class="left-event">
+                <h3>18</h3>
+                <span>March</span>
+            </div>
+            <div class="right-event">
+                <h4>Social Media</h4>
+                <p>Willson Tech Park</p>
+                <a href="#">More Info</a>
+            </div>
+        </div>
+        <!-- end -->
+        <!-- start -->
+        <div id="heading">
+         <h1>lets chat with us</h1>
+        </div>
+        <div id="chatting-engine">
+    
+            <div id="user-chat-box">
+                <div id="chat-message-list">
+                   <% for(let chats of chatting) {%>
+                    
+                        <% if( locals.user && user.name == chats.user) {%>
+                            
+                            <div class="my-message">
+                                <span class ="users-name"><%= chats.user %></span>
+                                <span class="message"><%= chats.content %></span>
+                            </div>
+                            
+                            <%} else {%>
+                                
+                                <div class="other-message">
+                                    <span class="users-name"><%= chats.user %></span>
+                                    <span class="message"><%= chats.content %></span>
+                                </div>
+                                
+                                <%}%>
+                        
+                        
+                       
+                    
+                    <%}%>   
+                 
+                    
+                </div>
+            </div>
+            <div id="input-message">
+                
+                <div id="message-input-button">
+                <div id="chat-message-input"><input id="chat-message-inputs"  type="text" placeholder="type message ..." name="message"></div>
+                <div><button id="send-message" type="submit">send</button></div>
+                </div>
+               
+        </div>
+        </div>
+        <!-- end -->
+</div>
+</div>
+
+ 
+
+ 
+<!-- its time to include the javascript -->
+ 
+<script src="/js/home_likes.js"></script>
+
+ 
+   
+    <script>
+        $('.toggle-like-button').each(function(){
+            let self = this;
+            let toggleLike = new ToggleLike(self);
+            console.log(this);
+        });
+    </script>
+     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <% if(locals.user) {%>
+        <script src="/js/chatting-engine.js"></script>
+        <script>
+             
+            new ChatEngine('user-chat-box', '<%= locals.user.email%>','<%=locals.user.name%>');
+
+        </script>
+        <%}%>

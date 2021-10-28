@@ -62,8 +62,15 @@
         <% if(locals.user){%>
           
           <div class="user-name">
-            <span class="contact-icon"><i class="fas fa-address-book"></i></span>
+            <% if(user.avatar) {%>
+              <span class="contact-icon"><img src="<%= user.avatar%>"></span>
+              <%} else {%>
+                
+                <span class="contact-icon"><img src="/images/actress2.jpg"></span>
+                <%}%>
+           
             <span><%=user.name%></span>
+            <span id="green-icon"></span>
          </div>
           <%}else{%>
             

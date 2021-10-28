@@ -66,6 +66,7 @@ passport.setAuthenticatedUser = function(req,res,next)
     {
         // req.user is contain the current signed un user from the session cookie and we are just sending this to the local for the view
         res.locals.user = req.user;
+        // console.log(locals.user);
     }
     next();
 }

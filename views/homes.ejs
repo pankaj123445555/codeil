@@ -1,19 +1,209 @@
 <!-- abhi yaha pe problem yah hai ki jisko bhi thodi bahut html aati hai vah edit as html mai jaa kar post create kar ke data-base mai save kar sakta hai -->
+<link rel="stylesheet" type="text/css" href="/css/chat-engine.css">
+<link rel ="stylesheet" href ="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
-<!-- if user is not logged in then he is not able post something -->
-<!-- ya he may see the post -->
-<% if(locals.user){%>
-    <div id="feed-post">
-        <form action="/posts/create" id="new-post-form" method="POST">
+
+<div id="main">
+    <!-- this is for the profile page -->
+    <div id="user-profile">
+          
+            <div id="user-information">
+                <!-- this is for user profile -->
+                <div id="image-edit">
+                <div id="user-image">
+                    <% if(locals.user) {%>
+                        <img src= <%=user.avatar%> >
+                        <%}%>
+               
+                </div>
+                <div id="name-edit">
+                    <% if(locals.user) {%>
+                        <span id="user-name"><%= user.name %></span>
+                        <span><a href="/user/profile/<%= user.id%>"> <button type="button">Edit-Profile</button></a></span>
+                        <%} %>
+                </div>
+
+                </div>
+                 
+            </div>
+            <!-- this is for the chat section -->
+            <% if(locals.user) {%>
+                
+                <h1><%= user.name%> let's chat with your friend</h1>
+                
+                <%}%>
+                  <!-- start -->
+                  <div id="chatting-engine">
+    
+                    <div id="user-chat-box">
+                        <ul id="chat-message-list">
+                         <li class="my-message"><span>my-message</span></li>
+                         <li class="other-message"><span>other-message</span></li>
+                        </ul>
+                    </div>
+                    <div id="input-message">
+                     
+                        <label><input id="chat-message-input" type="text" placeholder="type message ..." name="message"></label>
+                    <label><button id="send-message" type="submit">send</button></label>
+                      
+                </div>
+                </div>
+                  <!-- end -->
+            <!-- end of the chat section -->
+
+    </div>
+    <!-- end of current user profile page -->
+
+    <!-- this is for the user image -->
+    <div id="all-user-image">
+     
+      <%  if(locals.user) {%>
+        <form action="/posts/create" id="new-post-form" method="POST" enctype="multipart/form-data">
+            <div id="post-something">
+             <div id="input-file">
+            <span><input id="post-input" name="content" placeholder="whats in your mind post something..........."  required></input></span>
+        </div>
+        <div id="file-input-button">
+            <span id="file-input-button-span1"><input type="file" name="avatar" placeholder="profile Picture"></span>
+            <span><button id="post-button" type="submit" >Post</button></span>
+        </div>
+    </div>
+        </form>
+        
+        <%}%>
+          
+        <%for(post of posts){%>
+             
+            <div class="user-image-details">
+                <div class="template-user-name">
+                    <span class="current-user-image">
+                        <img src="<%= post.user.avatar%>">
+                    </span>
+                <span class="avatars-user-name"><%= post.user.name %></span>
+                </div>
+                
+                 <div class="template-user-image"> 
+                 <img src="<%=post.postAvatar.content%>">
+                </div>
+                <!-- time to add likes -->
+                <div class="likes">
+                <span class="likes-icon">
+                    <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id%>&type=Post">
+                        <i class="far fa-heart"></i> <%= post.likes.length %> likes</a>
+                </span>
+                </div>
+                <!-- end of like section -->
+                <!-- now adding the comment section -->
+                 <div class="post-comments">
+
+                   <div>
+                    <% if(locals.user){%>
+                        
+                        <form action="/comment/create" id ="new-comment-form" method="POST">
+                            <input class="comment-input" name="content" type="text" placeholder="write a comment">
+                            <input type="hidden" name="post" value="<%=post._id%>">
+                             <button class="add-comment" type="submit">add</button>
+                        </form>
+                        <%}%>
+                   </div>
+                  <!-- now its time to show the comment -->
+                  <div class="show-comment">
+                   <% for( comment of post.comments) {%>
+                    <div class="comment-container">
+                        <!-- show the comment user image -->
+                        <div class="comment-user-image">
+                          <img src="<%= comment.user.avatar%>">
+                        </div>
+                        <div class="comment-user-name-content">
+                        <div class="comment-user-name"><span><%= comment.user.name%></span></div>
+                        <div class="comment-content-delete-btn">
+                            <span><button>delete</button></span>
+                            <span class="comment-content"><%= comment.content %></span>
+                        </div>
+                        </div>
+                        <!-- end of showing the comment user image  -->
+                    </div>
+                    <%}%>
+                  </div>
+                  <!-- end of showing the comment -->
+                 </div>
+                <!-- end of adding the comment section -->
+                </div> 
+                
+            <%}%>
+        
+        <!-- now its time to show the image  -->
+
+        
+</div>
+    <!-- end of all user image -->
+
+    <!-- start of friend list -->
+    <div id="friend-list">
+
+    </div>
+    <!-- end of friend list -->
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <% if(locals.user){%> -->
+    <!-- <div id="feed-post">
+        <form action="/posts/create" id="new-post-form" method="POST" enctype="multipart/form-data">
             <h1>enter the comment and post</h1>
             <textarea name="content" cols="30" rows="10" required></textarea>
+            <input type="file" name="avatar" placeholder="profile Picture">
             <input type="submit" value="Post">
 
-        </form>
-        <%}%>
+        </form> -->
+           
+        <!-- <div id="feed-post">
+            <form action="/posts/creates"  method="POST" enctype="multipart/form-data">
+                <h1>enter the comment and post</h1>
+                <textarea name="content" cols="30" rows="10" required></textarea>
+                <input type="file" name="avatar" placeholder="profile Picture">
+                <input type="submit" value="Post">
+    
+            </form>  -->
 
-            <!-- any user can see the post -->
+        <!-- <%}%> -->
+
+        
+       <!-- <% for( let avatars of avataring) {%>
+        <%= avatars %>
+        <% avatars._id %>
+        <img src="<%= avatars.content %>" alt="image not found" width="100">
+        
+        <%}%> -->
+       
+
+            
     </div>
 
     <div id="posts-container">
@@ -23,16 +213,22 @@
                 
                     <li id="post-<%=post._id %>">
                         <p>
-                        <% if(locals.user&&(locals.user.id==post.user.id)){%>
+                         
                             <small>
-                                <a class="delete-post-btn" href="/posts/destroy/<%= post._id %>"><button type="button">delete</button></a>
+                                <a class="delete-post-btn"  href="/posts/destroy/<%= post._id %>"><button type="button">delete</button></a>
                             </small>
                             
-                            <%}%>
+                            
                        
-                        <!-- <%= post.content%> -->
                          
-                            <%= post.content%>
+                         
+                            <%= post%>
+                             
+                            <small>
+                                <a class="toggle-like-button" data-likes="<%= post.likes.length %>" href="/likes/toggle/?id=<%= post._id%>&type=Post">
+                                <%= post.likes.length %> likes</a>
+                            </small>
+                             
                          
                         
                         
@@ -41,10 +237,10 @@
                      
                         </p>
                
-                <!-- adding the comment section -->
-                <div class="comment-container">
+               
+                <!-- <div class="comment-container">
                     <% if(locals.user){%>
-
+                        
                         <form action="/comment/create" id ="new-comment-form" method="POST">
                             <input name="content" type="text" placeholder="write a comment">
                             <input type="hidden" name="post" value="<%=post._id%>">
@@ -52,27 +248,33 @@
                         </form>
 
                         <%}%>
-                </div>
+                </div> -->
 
-                <!-- ending the comment section -->
-                <!-- load the cooment and show the comment -->
+                
                 <div class="post-comment-list">
                     <ul class="post-comment-<%=post._id%>">
                         <% for(comment of post.comments){%>
 
-                            <!-- show the comment -->
-                              <% if(locals.user&&(locals.user.id==comment.user.id)){%>
+                             
+                            <li id="comment-<%= comment._id %>">
+                              <% if(locals.user&&(locals.user.id==comment.user._id)){%>
                                 
                                 <small>
-                                    <a href="/comment/destroy/<%= comment.id %>"><button type="button">delete</button></a>
+                                    <!-- <a  class="delete-comment-btn"  href="/comment/destroy/<%= comment._id %>"><button type="button">delete</button></a> -->
                                 </small>
                                 <%}%>
                                 
+                                 
+
                                 
-                                
-                            <!-- end of showing the comment -->
-                            <li>
-                                <%= comment.content%>
+                             
+                            
+                                <%= comment.user.name%>
+
+                                <small>
+                                    <a   data-likes="<%= comment.likes.length %>"  class="toggle-like-button" href="/likes/toggle/?id=<%=comment._id%>&type=Comment"> <%= comment.likes.length %> likes </a>
+                                     
+                                </small>
                                 
                             </li>
                             <%}%>
@@ -81,27 +283,97 @@
                 </div>
                     </li>
                 
-                <!-- end of loading the comment -->
+                 
 
                 <%}%>
         </ul>
     </div>
+
     
-    <!-- we have to put all the user profile here check in the home controller how to send all the user in the homes.ejs -->
+    
+     
     <div id="all_user">
       <h1>friends forever</h1>
       <ul>
           
-            <!-- iterate over all the user -->
-            <% for(user of all_user){%>
+             
+            <% for(users of all_user){%>
                 
-                <li>   <a href="/user/profile/<%= user.id%>"><%= user.name%> </a>  </li>
+                <li>   <a href="/user/profile/<%= users.id%>"><%= users.name%>  </a>  </li>
                 <%}%>
       </ul>
     </div>
-    <!-- ending of the showed friend in the list when the user is sign in it must be present in the list -->
-    <!-- starting of the jquery script tag -->
-    <script src="/js/home_post.js">
+   
 
+    
+      
+     <div>
+         <ul id="add-friend">
+             
+             
+            <% for(users of all_user){%>
+                
+                
+                     
+                        <li> 
+                        <span><%= users.name %></span>
+                        <span>  <a href="/user/add-friend/<%= users.id%>"> add-friend </a>  </span>
+                    </li>
+                         
+                        
+                        <%}%> 
+         </ul>
+     </div>
+      
+   
+    <div id="chatting-engine">
+    
+        <div id="user-chat-box">
+            <ul id="chat-message-list">
+             <li class="my-message"><span>my-message</span></li>
+             <li class="other-message"><span>other-message</span></li>
+            </ul>
+        </div>
+        <div id="input-message">
+         
+            <label><input id="chat-message-input" type="text" placeholder="type message ..." name="message"></label>
+        <label><button id="send-message" type="submit">send</button></label>
+          
+    </div>
+    </div>
+    
+    
+    
+    
+     
+  
+
+
+
+
+
+    
+    <!-- <script src="/js/home_post.js"></script> -->
+
+    <script src="/js/home_likes.js"></script>
+   
+    <script>
+        $('.toggle-like-button').each(function(){
+            let self = this;
+            let toggleLike = new ToggleLike(self);
+            console.log(this);
+        });
     </script>
+     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <% if(locals.user) {%>
+        <script src="/js/chatting-engine.js"></script>
+        <script>
+             
+            new ChatEngine('user-chat-box', '<%= locals.user.email%>')
+
+        </script>
+        <%}%>
+
+    
     <!-- ending of the jquery script tag -->

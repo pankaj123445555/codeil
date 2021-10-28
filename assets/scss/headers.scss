@@ -70,26 +70,13 @@
     display: flex;
     justify-content: space-around;
     width: 150px;
+    align-items: center;
 }
 .all-icon i
 {
     font-size: 27px;
 }
-.fb:hover
-{
-    color: blue;
-    border-bottom: 1px solid red;
-}
-.insta:hover
-{
-    color:pink;
-    border-bottom: 1px solid red;
-}
-.twtr:hover
-{
-    color:blue;
-    border-bottom: 1px solid red;
-}
+
 // sign in and the sign out section
 .signin-out
 {
@@ -101,6 +88,17 @@
 {
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+#green-icon
+{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #1ce41c;
+    right: 42px;
+    top: 27px;
 }
 .sign-in
 {
@@ -111,6 +109,7 @@
 .sign-out
 {
     display: flex;
+    align-items: center;
 }
 // design sign and sign out icon
 .sign-in-icon i
@@ -230,6 +229,12 @@
 .delete-icon span i
 {
     color: red;
+}
+.contact-icon img
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 }
 // end of the user clicked menu-bar
 

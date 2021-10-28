@@ -1,0 +1,360 @@
+
+::-webkit-scrollbar {
+    display: none;
+}
+#main{
+    width: 99vw;
+    height: 100vh;
+    border: 1px solid black;
+    display: flex;
+}
+// this is for the user profile
+#user-profile
+{
+    width: 30%;
+    height: 660px;
+    // border: 1px solid black;
+    background-color:#3552b159;
+    display: flex;
+    flex-direction: column;
+}
+#user-information
+{
+    width: 100%;
+    height: 160px;
+    // border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+#image-edit
+{
+    display: flex;
+    justify-content: space-around;
+}
+#user-image
+{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+#user-image img
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+#name-edit
+{
+    display: flex;
+    flex-direction: column;
+    margin-top: 45px;
+}
+#user-name
+{
+    font-size: xx-large;
+    font-family: -webkit-body;
+    color: tomato;
+    font-weight: bold;
+    text-align: justify;
+    text-transform: capitalize;
+}
+// end of the user profile
+
+
+
+
+
+
+
+
+#chatting-engine{
+    width: 99%;
+    position: relative;
+    height: 380px;
+    border: 2px solid black;
+    // margin: 5px;
+    display: flex;
+    flex-direction: column;
+    // margin-left: 30px;
+    background-image: url("/image/body-image.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+ul {
+    list-style-type: none;
+  }
+#input-message
+{
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+.my-message
+{
+    text-align: right;
+    color: blue;
+}
+#chat-message-input
+{
+    width: 60%;
+    height: 30px;
+    border-radius: 15px;
+    border: 2px solid black;
+    
+    outline: none;
+}
+#send-message
+{
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 32px;
+}
+#send-message {
+    transition-duration: 0.4s;
+  }
+  
+  #send-message:hover {
+    background-color: black; /* Green */
+    color: white;
+  }
+// all user image section
+#all-user-image
+{
+    width: 35%;
+    height: 660px;
+    border: 1px solid black;
+    overflow: scroll;
+    background-color: whitesmoke;
+}
+#post-something
+{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 150px;
+    justify-content: space-around;
+    border-bottom: 4px dotted blue;
+}
+#new-post-form
+{
+    display: flex;
+   flex-direction: column;
+    // align-items: center;
+
+}
+#post-input
+{
+    width: 98%;
+    height: 58px;
+    border: 2px solid black;
+    outline: none;
+    border-radius: 52px;
+    box-shadow: 0px 3px 10px green;
+}
+#input-file
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+#input-file span
+{
+    width: 100%;
+}
+#post-button
+{
+    background-image: linear-gradient(to right, #e01919, #ffb508);
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    border-radius: 32px;
+}
+#post-button {
+    transition-duration: 0.4s;
+  }
+  
+  #post-button:hover {
+    background-image: linear-gradient(to right, #664d4d, #ffb508);
+    color: white;
+  }
+  #file-input-button
+  {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+  }
+  #file-input-button-span1
+  {
+    display: flex;
+    align-items: center;
+  }
+// section of user image details
+.user-image-details
+{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+.template-user-name
+{
+    display: flex;
+}
+.template-user-image
+{
+    width: 100%;
+    height: 400px;
+
+}
+.template-user-image img
+{
+    width: 100%;
+    height: 100%;
+}
+.current-user-image
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin-right: 29px;
+    margin-left: 10px;
+}
+.current-user-image img
+{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.avatars-user-name
+{
+    font-size: xx-large;
+    font-family: -webkit-body;
+    color: black;
+    font-weight: bold;
+    text-align: justify;
+    text-transform: capitalize; 
+}
+.likes
+{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.likes-icon i
+{
+    font-size: 40px;
+    color: black;
+}
+// end of the user image details
+// adding the comment section
+.comment-input
+{
+    width: 60%;
+    border: 2px solid black;
+    outline: none;
+    height: 30px;
+    margin-right: 40px;
+}
+.add-comment
+{
+    background-color: #913030;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    // border-radius: 32px; 
+}
+.add-comment {
+    transition-duration: 0.4s;
+  }
+  
+  .add-comment:hover {
+      background-color: cyan;
+    color: black;
+  }
+ .post-comments
+ {
+     display: flex;
+     flex-direction: column;
+ } 
+ .comment-container
+ {
+    display: flex;
+    // justify-content: space-around;
+    background: darkgrey;
+    margin: 16px 0px;
+ }
+ .comment-user-image
+ {
+     width: 50px;
+     height: 50px;
+     border: 1px solid black;
+     border-radius: 50%;
+     margin: 0px 15px;
+ }
+ .comment-user-image img
+ {
+     width: 100%;
+     height: 100%;
+     border-radius: 50%;
+ }
+ .comment-user-name-content
+ {
+     display: flex;
+     flex-direction: column;
+ }
+ .comment-content-delete-btn
+ {
+     display: flex;
+ }
+ .comment-content-delete-btn span
+ {
+     margin: 0px 5px;
+ }
+ .comment-user-name span
+ {
+    font-size: x-large;
+    font-family: -webkit-body;
+    color: black;
+    font-weight: bold;
+    text-align: justify;
+    text-transform: capitalize; 
+    color: red;
+ }
+ .comment-content
+ {
+     color: black;
+     z-index: 1;
+ } 
+// ending of adding the comment section
+
+
+
+
+
+
+// end of all user image section
+
+// start of the friend list section
+#friend-list
+{
+    width: 25%;
+    height: 660px;
+    border: 1px solid black;
+}
+// end of the friend list section

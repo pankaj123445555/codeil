@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
-
+const Friendship = require('../models/friendship');
+const Chat  = require('../models/chat_file');
 
 // adding sign in page
 module.exports.signin = function(req,res)
@@ -104,7 +105,7 @@ module.exports.create = function(req,res){
      
     if(req.body.password!=req.body.confirmpassword)
     {
-        console.log('pankaj');
+         
         return res.redirect('back');
     }
     User.findOne({email:req.body.email},function(err,user){
@@ -138,22 +139,54 @@ module.exports.create = function(req,res){
 
 
 
-module.exports.profile = function(req,res)
+module.exports.profile = async function(req,res)
 {
     
-    User.findById(req.params.id,function(err,user){
-        if(err)
+     let user = await User.findById(req.params.id)
+    .populate({
+    path: 'posts',
+    populate: [
         {
-            console.log('error in finding the user by req.params',err);
-            return;
+            path: 'user'
         }
-        else
-        {
-            return res.render('user_profile',{ users:user, footerhidden: true, headerhidden: false,title: "understand a layout"});
-        }
-    });
+    ]
+   })
+         
+         
+    return res.render('user_profiles',{ users:user, footerhidden: true, headerhidden: false,title: "understand a layout"});
+        
      
 }
+
+// create a controller for adding a friend
+module.exports.Friend   = function(req,res)
+{
+    
+     
+    Friendship.create({
+        from_user : req.user._id,
+        to_user : req.params.id,
+    },function(err,friends){
+        if(err)
+        {
+            console.log('error in creating a friendship');
+            return;
+        }
+         User.findById(req.user._id,function(err,user){
+              
+             user.friendships.push(friends);
+             user.save();
+
+              
+             console.log('user');
+                 
+         });  
+             
+    })
+    return res.redirect('back');
+}
+
+// ending of adding a friend
 
 
 
@@ -161,17 +194,9 @@ module.exports.profile = function(req,res)
 
 module.exports.update = async function(req,res)
 {
+    
     let user =  await User.findByIdAndUpdate(req.params.id)
-    //  User.findByIdAndUpdate(req.params.id,{name:req.body.name,email: req.body.email},function(err,user){
-
-    //    if(err)
-    //    {
-    //        console.log('error in updating the profile',err);
-    //        return;
-    //    }
-    //     return res.redirect('back');
-
-    //  });
+    
     if(req.user.id == req.params.id)
     {
         try{
@@ -180,11 +205,15 @@ module.exports.update = async function(req,res)
             User.uploadedAvatar(req,res,function(err){
                 if(err)
                 {
-                    console.log('error in mttler',err);
+                    console.log('error in multer',err);
                     return;
                 }
+                
                 user.name = req.body.name;
                 user.email = req.body.email;
+                user.content = req.body.about;
+                user.phone = req.body.phone;
+                user.address = req.body.address;
                 if(req.file)
                 {
                     if(user.avatar)
@@ -204,6 +233,7 @@ module.exports.update = async function(req,res)
 
 
         }catch(err){
+            console.log('/////',err);
             return res.redirect('back');
         }
     }
@@ -241,3 +271,12 @@ module.exports.destroySession = function(req,res)
 
     res.redirect('/');
 }
+
+// its time to show the update page
+module.exports.updatePage = async function(req,res)
+{
+    let users = await User.findById(req.params.id);
+    return res.render('update_page',{ users:users, footerhidden: true, headerhidden: false,title: "understand a layout"});
+}
+
+ 

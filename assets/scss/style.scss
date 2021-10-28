@@ -1,0 +1,494 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+body{
+    background: #efefef;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.container
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 13px 5%;
+}
+.left-sidebar
+{
+    /* background: #cbdffa; */
+    flex-basis: 25%;
+    position: sticky;
+    width: 25%;
+    top: 70px;
+    align-self: flex-start;
+    height: 100vh;
+}
+.right-sidebar
+{
+    background: #fff;
+    flex-basis: 25%;
+    width: 25%;
+    position: sticky;
+    top: 70px;
+    align-self: flex-start;
+     padding: 20px;
+     border-radius: 4px;
+     color: #626262;
+     margin-left: 67px;
+}
+.main-content
+{
+    width: 47%;
+}
+.imp-link a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    color: #626262;
+   width: fit-content;
+}
+.imp-link a i
+{
+    width: 25px;
+    margin-right: 15px;
+    color:lightblue;
+}
+.imp-link a:last-child
+{
+    color: #1876f2;
+}
+.imp-link
+{
+    border-bottom: 1px solid #ccc;
+}
+.sidebar-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+
+}
+.sidebar-title h4
+{
+    font-weight:600;
+    font-size: 16px;
+}
+.sidebar-title a
+{
+    text-decoration: none;
+    color: #1876f2;
+    font-size: 12px;
+}
+.event
+{
+    display: flex;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.left-event
+{
+    border-radius: 10px;
+    height: 65px;
+    width: 65px;
+    margin-right: 15px;
+    padding-top: 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.event p
+{
+    font-size: 12px;
+}
+.event a
+{
+    font-size: 12px;
+    text-decoration: none;
+    color: #1876f2;
+}
+.left-event span
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #1876f2;
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 18px;
+}
+.story-gallery
+{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:20px;
+}
+.story
+{
+    flex-basis: 18%;
+    padding-top: 32%;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    border-radius: 10px;
+}
+.story i
+{
+    position: absolute;
+    border-radius: 50%;
+    top: 73px;
+    left: 22px;
+    color: white;
+    font-size: 30px;
+    border: 1px solid white;
+    /* background: blue; */
+}
+.story img
+{
+    position: absolute;
+     width: 30px;
+    border-radius: 50%;
+    top: 0px;
+    left: 0px;
+    color: white;
+    font-size: 30px;
+    border: 5px solid #626262;
+    /* background: blue; */
+}
+.story p
+{
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+}
+.story1
+{
+    background-image: linear-gradient(transparent,rgba(0,0,0,0.5)), url(/images/actress1.jfif);
+}
+.story2
+{
+    background-image: linear-gradient(transparent,rgba(0,0,0,0.5)), url(/images/zayn-malik.jpg);
+}
+.story3
+{
+    background-image: linear-gradient(transparent,rgba(0,0,0,0.5)), url(/images/rashmika-madana.jpg);
+}
+.story4
+{
+    background-image: linear-gradient(transparent,rgba(0,0,0,0.5)), url(/images/rashmika-madana.jpg);
+}
+.story5
+{
+    background-image: linear-gradient(transparent,rgba(0,0,0,0.5)), url(/images/babe1.jfif);
+}
+
+.write-post-container
+{
+    width: 100%;
+    background: #fff;
+    border-radius: 6px ;
+    padding: 20px;
+    color: #626262;
+}
+.post-submit-btn
+{
+    display: flex;
+    justify-content: space-around;
+}
+#post-button
+{
+    background-color: #913030;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 5px;
+}
+#file-input-button-span1
+{
+    display: flex;
+    align-items: center;
+}
+#post-button {
+    transition-duration: 0.4s;
+  }
+  
+  #post-button:hover {
+      background-color: cyan;
+    color: black;
+  }
+.user-profile
+{
+    display: flex;
+    align-items: center;
+}
+.user-profile a img
+{
+     
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    height: 50px;
+}
+.user-profile p
+{
+    margin-bottom: -5px;
+    font-weight: 500;
+    color: #626262;
+}
+.user-profile small
+{
+    font-size: 12px;
+}
+.post-input-container
+{
+    padding-left: 55px;
+    padding-top: 20px;
+}
+.post-input-container textarea
+{
+    width: 100%;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid #ccc ;
+    background: transparent;
+    resize: none;
+}
+// this is the post container
+
+
+
+
+
+.post-container 
+{
+    width: 100%;
+    background: #fff;
+    border-radius: 6px;
+    padding: 20px;
+    color: #626262;
+    margin: 20px 0;
+    position: relative;
+}
+.user-profile span
+{
+    font-size: 13px;
+    color: #9a9a9a;
+}
+.post-text
+{
+    color: #9a9a9a;
+    margin: 15px 0;
+    font-size: 15px;
+}
+.post-img
+{
+    width: 100%;
+    border-radius: 4px ;
+    margin-bottom: 5px;
+}
+// comment section
+.like-comment
+{
+    display: flex;
+    margin: 18px 0px;
+}
+.comment-form-input
+{
+    width: 100%;
+}
+.comment-input
+{
+    width: 74%;
+    height: 30px;
+    border-radius: 7px;
+    border: 1px solid #626262;
+}
+.add-comment
+{
+    background-color: #a93e3cc9;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 5px;
+    margin-left: 40px;
+}
+.comment-user-profile span img
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.show-comment
+{
+    display: flex;
+    position: relative;
+    background-color: #62626212;
+    margin: 14px 0px;
+}
+.comment-user-content
+{
+    display: flex;
+    flex-direction: column;
+}
+.comment-delete-btn
+{
+    position: absolute;
+    right: 0px;
+}
+.comment-user-name
+{
+font-weight: 500;
+color: black;
+margin-bottom: 5px;
+}
+.comment-user-profile
+{
+    margin-right: 20px;
+}
+
+
+
+
+
+
+
+
+// design a user chatiing engine
+#chatting-engine
+{
+  width: 100%;
+  height: 330px;
+  border:  2px solid black;
+  background: #fff;
+  margin-top: 25px;
+  box-shadow: 5px 8px 8px 8px #888888;
+}
+ 
+#user-chat-box
+{
+    width: 100%;
+    height: 280px;
+    // border: 1px solid red;
+    overflow-y: scroll;
+}
+#chat-message-list
+{
+    display: flex;
+    flex-direction: column;
+}
+.my-message
+{
+    display: flex;
+    flex-direction: column;
+    margin: 9px 10px;
+    background: #92c492;
+    border-radius: 10px;
+    padding: 0px 12px;
+}
+.other-message
+{
+    display: flex;
+    flex-direction: column;
+    margin: 9px 10px;
+    background: #cacacaab;
+    border-radius: 10px;
+    // padding: 0px 12px;
+}
+.users-name
+{
+    color: red;
+}
+#heading h1
+{
+   color: teal;
+}
+// its time to design the input
+#input-message
+{
+    display: flex;
+    align-items: flex-end;
+    height: 50px;
+     border-top: 2px solid red;
+}
+#message-input-button
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+#chat-message-input
+{
+    width: 60%;
+    
+}
+#chat-message-input input
+{
+    width: 100%;
+    height: 20px;
+    border-radius: 5px;
+    border: 3px solid green;
+    outline: none;
+    // margin-right: 20px;
+}
+// start
+#send-message
+{
+    background-color: #913030;
+    border: none;
+    color: white;
+     width: 38px;
+     height: 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    // margin: 5px;
+}
+ 
+#send-message {
+    transition-duration: 0.4s;
+  }
+  
+  #send-message:hover {
+      background-color: cyan;
+    color: black;
+  }
+  #message-form
+  {
+      width: 100%;
+  }
+// end
+// design the delete post btn
+.delete-post-btn
+{
+    position: absolute;
+    top: 0;
+    right: 8px;
+}
+.delete-post-btn a i
+{
+    font-size: 30px;
+}
+.delete-post-btn a i:hover
+{
+    color: red;
+}
+// end
+
+

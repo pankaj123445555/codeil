@@ -1,38 +1,67 @@
 
 const Post = require('../models/post');
 const Comment = require('../models/comments');
-module.exports.create = function(req,res)
-{
-    console.log(req.body);
-    Post.create({
-        content: req.body.content,
-        user: req.user._id                                                           // if error is something that canot read the property and you write the right code means syantatically correct then put it into the ''colon
-    } ,function(err,post){
+const User = require('../models/user');
+
+ 
+
+module.exports.create = async  function(req,res){
+
     
-        // this is for the ajax request
-        //  console.log(req.xhr);
-        if(req.xhr){ 
-            return res.status(200).json({
-             data: {
-                 post:post
-             },
-             message: "post created!"
-            })
-        }
-        // end of the ajax request
+  await  Post.uploadedAvatar(req,res, function(err){
+        
         if(err)
         {
-            console.log('error at the posting the post',err);
+            console.log('error in uploaded avatar',err);
             return;
         }
+         
+    
+       Post.create({
         
-        res.redirect('back');
-    });
-      
+        content: req.body.content,
+      avatar : Post.avatarPath + '/' +req.file.filename,
+     user: req.user._id
+    },function(err,post){
+        if(err)
+        {
+            console.log('error in posting the post',err);
+        }
+        
+        User.findById(req.user._id,function(err,user){
+            if(err)
+            {
+                console.log('error in finding the user',err);
+                return;
+            }
+            user.posts.push(post._id);
+            user.save();
+            // console.log('...../',post);
+            console.log('...../',user);
+        })
+          
+        
+    })    
+    })
+    return res.redirect('back');
+
 }
+
+
+
+
+ 
+ 
+
+
+
+
+
+
 // deleting a post only user can delete its own post
 module.exports.destroy = async function(req,res)
 {
+    
 
     try {
 
@@ -41,31 +70,17 @@ module.exports.destroy = async function(req,res)
      if(post.user==req.user.id)
      {
         //  this is for deleting the post 
+         
          post.remove();
+       
          
         //  this is for deleting all the comment
         await  Comment.deleteMany({post: req.params.id})
         
-         
-         if(req.xhr)
-         {
-             return res.status(200).json({
-                 data: {
-                     post_id : req.params.id
-                 },
-                 message: "succesfully deleted the post"
-             })
-             
-         }
-
-
-             return res.redirect('back');
-         
      }
-     else
-     {
-         return res.redirect('back');
-     }
+      
+     return res.redirect('back');
+     
         
     } catch (error) {
         

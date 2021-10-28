@@ -18,8 +18,10 @@
                 data: newPostform.serialize(), 
                 success: function(data){
                      let newPost = newPostDom(data.data.post);
+                     new ToggleLike($(' .toggle-like-button',newPost));
                     $('#posts-container>ul').prepend(newPost);
-                    deletePost($(' .delete-post-btn'))
+                    createComment();
+                    // deletePost($('.delete-post-btn'))
                      
                     
                 }, error: function(error){
@@ -44,6 +46,13 @@
             
        
          ${post.content}
+
+        
+        <small>
+        <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${post._id}&type=Post">
+        0 likes</a>
+    </small>
+         
      
         </p>
 
@@ -72,6 +81,32 @@
     </li>`)
     }
 
+
+    // returning the newcomment
+    let newCommentDom = function(comment)
+    {
+         return $(` <li id= comment-${comment._id}>
+         
+           
+           <small>
+               <a class ="delete-comment-btn"  href="/comment/destroy/${comment._id }"><button type="button">delete</button></a>
+           </small>
+            
+           
+           
+           
+        
+       
+           ${comment.content}
+           <small>
+               <a   data-likes="${ comment.likes.length }"  class="toggle-like-button" href="/likes/toggle/?id=${comment._id}&type=Comment"> 0 likes </a>
+                
+           </small>
+           
+       </li>`)
+    }
+    // ending of returning the new comment
+
     let deletePost = function(deletelink)
     {
         $(deletelink).click(function(e){
@@ -83,6 +118,7 @@
                 success: function(data)
                 {
                     console.log(data);
+                   
                     // this is for the removing the data from the screen
                    $(`#post-${data.data.post_id}`).remove();
                 },error: function(error){
@@ -107,12 +143,11 @@
                 url: '/comment/create',
                 data: newCommentform.serialize(), 
                 success: function(data){
-                     
-                       var element = $(`.post-comment-${data.data.comment.post}`)
-                       element.append( `<small>
-                        <a href="/comment/destroy/${ data.data.comment._id }"><button type="button">delete</button></a>
-                    </small>`)
-                       element.append(`${data.data.comment.content}`);
+                    console.log(data);
+                    let newcomment = newCommentDom(data.data.comment);
+                    new ToggleLike($(' .toggle-like-button',newcomment));
+                    $(`.post-comment-${data.data.comment.post}`).prepend(newcomment);
+                    deleteComment($(' .delete-comment-btn'));
                 }, error: function(error){
                     console.log(error);
                 }
@@ -121,9 +156,32 @@
     }
      
     // ending up of creating a post
+
+
+    //  now its time to destroy the comment
+    let deleteComment = function(deletelinkcomment)
+    {
+        $(deletelinkcomment).click(function(e){
+            e.preventDefault();
+            
+            $.ajax({
+                type: 'get',
+                url: $(deletelinkcomment).prop('href'),
+                success: function(data)
+                {
+                    console.log($(`#comment-${data.data.comment._id}`));
+                   $(`#comment-${data.data.comment._id}`).remove();
+                },error: function(error){
+                    console.log('error on deleting the cooment using ajax');
+                }
+            })
+        })
+    }
+    // ending of destroy the comment
            
     createComment();
     deletePost($(' .delete-post-btn'))
     createPost();
-   
+    deleteComment($(' .delete-comment-btn'));
+    
 }
