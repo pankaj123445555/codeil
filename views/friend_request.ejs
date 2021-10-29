@@ -1,9 +1,17 @@
-<div>
-    <ul>
-        <% for(all_user of userss) {%>
-            
-            <li><%= all_user %></li>
-            <%}%>
+<link rel="stylesheet" type="text/css" href="/css/style2.css">
+
+<div class="friend-request">
+    <% for(let all_user of users) {%>
         
-    </ul>
+        <div class="friends">
+            <div class="friends-img"><a><img src="<%=all_user.avatar %>"></a></div>
+            <div class="friends-name"><span><%= all_user.name %></span></div>
+            <div class="add-friend-button"><button>Add-friend</button></div>
+        </div>
+        
+        <%}%>
+     
+
+     
+      
 </div>

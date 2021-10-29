@@ -9,6 +9,9 @@ const friendshipSchema = new mongoose.Schema({
     to_user: {
         type:  mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    status: {
+        type: String
     }
 })
 

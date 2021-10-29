@@ -8,11 +8,10 @@ const { populate } = require('../models/post');
 
 
 
-
-module.exports.addFriends = async function(req,res)
+module.exports.addFriend = async function(req,res)
 {
-    let userss = await User.find({});
-    return res.render('friend_request',{userss:userss,  footerhidden: true, headerhidden: false,title: "understand a layout"});
+    let users = await User.find({});
+    return res.render('friend_request',{users: users, footerhidden: false, headerhidden: false,title: "understand a signin"});
 }
 
 
