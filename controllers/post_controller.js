@@ -70,10 +70,12 @@ module.exports.destroy = async function(req,res)
      if(post.user==req.user.id)
      {
         //  this is for deleting the post 
+        let users = await User.findById(req.user.id);
+       await User.findByIdAndUpdate(req.user.id,{$pull: {posts: req.params.id}}); 
          
          post.remove();
-       
          
+          users.save();
         //  this is for deleting all the comment
         await  Comment.deleteMany({post: req.params.id})
         
@@ -84,7 +86,7 @@ module.exports.destroy = async function(req,res)
         
     } catch (error) {
         
-        console.log('error on deleting a post');
+        console.log('error on deleting a post',error);
     }
    
    

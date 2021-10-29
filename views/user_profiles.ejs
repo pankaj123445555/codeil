@@ -7,7 +7,10 @@
      <div class="user-profile">
          <div class="user-image"><img src="<%=users.avatar%>"></div>
          <div class="user-profile-div"><a class="color" href="#"><%= users.name%></a></div>
-         <div  class="user-profile-div"><a class="color" href="/user/update-page/<%= users.id %>">update-Profile</a></div>
+         <% if(user.id == users.id) {%>
+            <div  class="user-profile-div"><a class="color" href="/user/update-page/<%= users.id %>">update-Profile</a></div>
+            <%}%>
+         
          <div class="user-profile-div"><a class="color" href="#">Work</a></div>
          <div  class="user-profile-div"><a class="color" href="#">Support</a></div>
          <div class="user-profile-div"><a class="color" href="#">Setting</a></div>
