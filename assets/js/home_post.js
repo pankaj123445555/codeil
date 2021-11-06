@@ -163,7 +163,7 @@
     {
         $(deletelinkcomment).click(function(e){
             e.preventDefault();
-            
+        
             $.ajax({
                 type: 'get',
                 url: $(deletelinkcomment).prop('href'),

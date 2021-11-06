@@ -54,22 +54,7 @@ let usering = await User.find({})
 
 // adding the friendships 
 let users = await User.find({})   //  Find all the users to send them on home page    ***** TODO: Don't set the password to browser  **** *
-let loggedInUser;
-if(req.user){   //  Find all the friends of the user if user is logged in
-    loggedInUser = await User.findById(req.user._id)
-    .populate({
-        path: 'friendships',
-        populate: [
-            {
-                path: 'from_user'  // ***** TODO: Don't set the password to browser  *****
-            },
-            {
-                path: 'to_user'   // ***** TODO: Don't set the password to browser  *****
-            }
-        ]
-    });
-
-}
+ 
  
  let chatting = await Chat.find({})
  
@@ -78,7 +63,7 @@ if(req.user){   //  Find all the friends of the user if user is logged in
       
 
 
-    return res.render('main',{usering: usering, chatting: chatting, posts:posts, all_user: users, loggedInUser:loggedInUser, footerhidden: false, headerhidden: false,title: "understand a signin"});
+    return res.render('main',{usering: usering, chatting: chatting, posts:posts, all_user: users, footerhidden: false, headerhidden: false,title: "understand a signin"});
 
 
     }catch(err){

@@ -1,17 +1,43 @@
 <link rel="stylesheet" type="text/css" href="/css/style2.css">
 
 <div class="friend-request">
-    <% for(let all_user of users) {%>
+    <% for(let allUser of users) {%>
+         <% if(user.id != allUser.id) {%> 
+            
+            <% if(!user.friendships.includes(allUser.id))  {%>
+                
+                <div class="friends">
+                    <div class="friends-img"><a><img src="<%=allUser.avatar %>"></a></div>
+                    <div class="friends-name"><span><%= allUser.name %></span></div>
+                    <div class="add-friend-button"> <a class  ="all-friend" href="/user/add-friend/<%=allUser.id %>"><button id ="add-<%=allUser.id %>">Add-friend</button></a></div>
+                </div>
+                
+                <%} else {%>
+                    
+                    <div class="friends">
+                        <div class="friends-img"><a><img src="<%=allUser.avatar %>"></a></div>
+                        <div class="friends-name"><span><%= allUser.name %></span></div>
+                        <div class="add-friend-button"> <a class ="all-friend" href="/user/destroy-friend/<%=allUser.id %>" ><button id ="remove-<%=allUser.id %>">Friends</button></a></div>
+                    </div>
+                    
+                    <%}%>
+            
+            
+            <%}%>
         
-        <div class="friends">
-            <div class="friends-img"><a><img src="<%=all_user.avatar %>"></a></div>
-            <div class="friends-name"><span><%= all_user.name %></span></div>
-            <div class="add-friend-button"><button>Add-friend</button></div>
-        </div>
         
         <%}%>
-     
-
-     
-      
+        
 </div>
+
+<script src="/js/friends.js"></script>
+<script>
+    $('.all-friend').each(function(){
+        let self = this;
+        let Friend = new FriendRequest(self);
+        console.log(this);
+    });
+</script>
+
+
+</script>

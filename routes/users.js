@@ -11,9 +11,10 @@ router.get('/signin',user_contoller.signin);
  router.get('/signup',user_contoller.signup); 
 
 router.get('/profile/:id',passport.checkAuthentication,user_contoller.profile);
-// now its time to add a friend
+// now its time to add a friend and destoy a friend
 router.get('/add-friend/:id',passport.checkAuthentication,user_contoller.Friend);
-// ending of adding a friend
+router.get('/destroy-friend/:id',passport.checkAuthentication,user_contoller.destroyFriend);
+// ending of adding a friend and destroy a friend
 
 //  finally hamara form yaha jaayega
 router.post('/create',user_contoller.create);

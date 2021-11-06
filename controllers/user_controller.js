@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
-const Friendship = require('../models/friendship');
+ 
 const Chat  = require('../models/chat_file');
 
 // adding sign in page
@@ -159,30 +159,24 @@ module.exports.profile = async function(req,res)
 }
 
 // create a controller for adding a friend
-module.exports.Friend   = function(req,res)
+module.exports.Friend   = async function(req,res)
 {
-    
-     
-    Friendship.create({
-        from_user : req.user._id,
-        to_user : req.params.id,
-    },function(err,friends){
-        if(err)
-        {
-            console.log('error in creating a friendship');
-            return;
-        }
-         User.findById(req.user._id,function(err,user){
-              
-             user.friendships.push(friends);
-             user.save();
-
-              
-             console.log('user');
-                 
-         });  
-             
-    })
+    console.log('...../','added works');
+     let user = await  User.findById(req.params.id);
+     let currUser = await User.findById(req.user.id);
+     currUser.friendships.push(user._id);
+     currUser.save();
+     if(req.xhr)
+     {
+         return res.status(200).json({
+             data: {
+                 user: user
+             },
+             message: "add"
+         })
+         
+     }
+     console.log(currUser);
     return res.redirect('back');
 }
 
@@ -277,6 +271,27 @@ module.exports.updatePage = async function(req,res)
 {
     let users = await User.findById(req.params.id);
     return res.render('update_page',{ users:users, footerhidden: true, headerhidden: false,title: "understand a layout"});
+}
+// its time to destoy a friend
+module.exports.destroyFriend = async function(req,res)
+{
+    console.log(req.params.id);
+    let users = await User.findById(req.user.id);
+     users.friendships.pull(req.params.id);
+     users.save();
+     let user = await User.findById(req.params.id);
+     if(req.xhr)
+            {
+                return res.status(200).json({
+                    data: {
+                        user: user
+                    },
+                    message: "remove"
+                })
+                
+            }
+
+    return res.redirect('back');
 }
 
  
