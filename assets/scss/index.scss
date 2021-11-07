@@ -149,12 +149,16 @@ button{
 }
 #all-icon {
      display: flex;
-     justify-content: space-between;
+     justify-content: center;
 }
 
 #all-icon span i{
-    font-size: 23px;
+    font-size: 30px;
     color: red;
+}
+#all-icon span i:hover
+{
+    color: blue;
 }
 
 /* adding media query to the sign in and sign out page */
