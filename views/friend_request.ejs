@@ -7,7 +7,12 @@
             <% if(!user.friendships.includes(allUser.id))  {%>
                 
                 <div class="friends">
-                    <div class="friends-img"><a><img src="<%=allUser.avatar %>"></a></div>
+                    <% if(allUser.avatar) {%>
+                        <div class="friends-img"><a href="/user/profile/<%= allUser.id%>"><img src="<%=allUser.avatar %>"></a></div>
+                        <%} else {%>
+                            <div class="friends-img"><a href="/user/profile/<%= allUser.id%>"><img src="/images/avatar-image.webp"></a></div>
+                            <%}%>
+                   
                     <div class="friends-name"><span><%= allUser.name %></span></div>
                     <div class="add-friend-button"> <a class  ="all-friend" href="/user/add-friend/<%=allUser.id %>"><button id ="add-<%=allUser.id %>">Add-friend</button></a></div>
                 </div>
@@ -15,7 +20,11 @@
                 <%} else {%>
                     
                     <div class="friends">
-                        <div class="friends-img"><a><img src="<%=allUser.avatar %>"></a></div>
+                        <% if(allUser.avatar) {%>
+                            <div class="friends-img"><a href="/user/profile/<%= allUser.id%>"><img src="<%=allUser.avatar %>"></a></div>
+                            <%} else {%>
+                                <div class="friends-img"><a href="/user/profile/<%= allUser.id%>"><img src="/images/avatar-image.webp"></a></div>
+                                <%}%>
                         <div class="friends-name"><span><%= allUser.name %></span></div>
                         <div class="add-friend-button"> <a class ="all-friend" href="/user/destroy-friend/<%=allUser.id %>" ><button id ="remove-<%=allUser.id %>">Friends</button></a></div>
                     </div>

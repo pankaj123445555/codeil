@@ -5,7 +5,14 @@
  
     <div class="main">
      <div class="user-profile">
-         <div class="user-image"><img src="<%=users.avatar%>"></div>
+         <div class="user-image">
+             <% if(users.avatar) {%>
+                <img src="<%=users.avatar%>">
+                <%} else{%>
+                    <img src="/images/avatar-image.webp">
+                    <%}%>
+            
+            </div>
          <div class="user-profile-div"><a class="color" href="#"><%= users.name%></a></div>
          <% if(user.id == users.id) {%>
             <div  class="user-profile-div"><a class="color" href="/user/update-page/<%= users.id %>">update-Profile</a></div>

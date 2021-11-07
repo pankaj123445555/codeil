@@ -28,7 +28,7 @@ module.exports.create = function(req,res)
             // ending up the nodemailer module
              
             
-            res.redirect('/');
+             return res.redirect('back');
            
            });
         }

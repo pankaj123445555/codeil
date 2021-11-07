@@ -23,7 +23,7 @@ body
     width: 20%;
     height: 213px;
     background: #fff;
-     
+     border-radius: 7px;
 }
 .left-content-div
 {
@@ -37,6 +37,7 @@ body
 .left-content-icon
 {
     font-size: 30px;
+    color: blue;
 }
 .left-content-text a
 {
@@ -57,6 +58,7 @@ body
     padding: 20px;
     display: flex;
     flex-direction: column;
+    border-radius: 7px;
 }
 #edit-profile-text
 {

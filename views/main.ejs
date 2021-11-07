@@ -7,11 +7,16 @@
     <!-- this is the left side bar -->
 <div class="left-sidebar">
     <div class="imp-link">
-        <a href="#"><i class="far fa-newspaper"></i> Latest News</a>
-        <a href="#"><i class="fas fa-user-friends"></i> Friends</a>
+        <% if(locals.user) {%>
+            <a href="/user/update-page/<%= user.id %>"><i class="far fa-newspaper"></i> update-Profile</a>
+            <%}else {%>
+                <a href="#"><i class="far fa-newspaper"></i> Latest-news</a>
+                <%}%>
+       
+        <a href="/add-friends"><i class="fas fa-user-friends"></i> Friends</a>
         <a href="/add-friends"><i class="fas fa-users"></i> Add-Friends</a>
         <a href="#"><i class="fas fa-cart-plus"></i> marketplace</a>
-        <a href="#"><i class="fab fa-youtube"></i> watch</a>
+        <a href="https://www.youtube.com"><i class="fab fa-youtube"></i> watch</a>
         <a href="#">See More</a>
     </div>
     
@@ -54,7 +59,12 @@
     <% if(locals.user) {%>
     <div class="write-post-container">
         <div class="user-profile">
-            <a href="/user/profile/<%= user.id%>"><img src= <%= user.avatar %>></a>
+            <% if(user.avatar) {%>
+                <a href="/user/profile/<%= user.id%>"><img src= <%= user.avatar %>></a>
+                <%} else {%>
+                    <a href="/user/profile/<%= user.id%>"><img src= "/images/avatar-image.webp"></a>
+                    <%}%>
+           
        <div>
        <p><%= user.name %></p>
         <small>public</small>
@@ -77,13 +87,16 @@
     <div class="post-container">
         <div class="user-profile">
             
-            <a href="/user/profile/<%= post.user.id%>"><img src="<%= post.user.avatar%>"></a> 
+                <a href="/user/profile/<%= post.user.id%>"><img src="<%= post.user.avatar%>"></a> 
+                
+            
             <div>
             <p><%= post.user.name %></p>
              <span><%=post.createdAt %></span>
              </div>
              </div>
              <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab libero aliquid repudiandae praesentium ratione eius, minima cum! Magni, optio! Corrupti laudantium aliquid sequi. Reiciendis sequi optio maiores voluptatem ea odio.</p>
+        
              <img src= "<%= post.avatar %>" class="post-img">
              <div class="like-comment">
                 <span class="likes-icon">
@@ -153,24 +166,13 @@
                 <a href="#">More Info</a>
             </div>
         </div>
-        <!-- start -->
-        <div class="event">
-            <div class="left-event">
-                <h3>18</h3>
-                <span>March</span>
-            </div>
-            <div class="right-event">
-                <h4>Social Media</h4>
-                <p>Willson Tech Park</p>
-                <a href="#">More Info</a>
-            </div>
-        </div>
-        <!-- end -->
-        <!-- start -->
-        <div id="heading">
-         <h1>lets chat with us</h1>
-        </div>
+         
+        
+         
         <div id="chatting-engine">
+            <div id="chat-heading">
+             <span>Lets Chat with us !</span>
+            </div>
     
             <div id="user-chat-box">
                 <div id="chat-message-list">

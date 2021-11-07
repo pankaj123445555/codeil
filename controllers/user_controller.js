@@ -147,7 +147,16 @@ module.exports.profile = async function(req,res)
     path: 'posts',
     populate: [
         {
-            path: 'user'
+            path: 'user',
+        },
+        
+        {
+            path: 'comments',
+            populate: [
+                {
+                    path: 'user'
+                }
+            ]
         }
     ]
    })

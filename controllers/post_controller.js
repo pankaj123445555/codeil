@@ -2,7 +2,7 @@
 const Post = require('../models/post');
 const Comment = require('../models/comments');
 const User = require('../models/user');
-
+const Like = require('../models/likes');
  
 
 module.exports.create = async  function(req,res){
@@ -78,6 +78,7 @@ module.exports.destroy = async function(req,res)
           users.save();
         //  this is for deleting all the comment
         await  Comment.deleteMany({post: req.params.id})
+        await  Like.deleteMany({likeable: req.params.id})
         
      }
       
