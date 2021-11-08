@@ -4,7 +4,8 @@ const cookieParser = require('cookie-parser');
 // adding all the functionality to the app which have in the express
 const app = express();
 
-const port = 8000;
+
+const port = process.env.Port || 8000;
 const expresslayouts = require('express-ejs-layouts');
 
 const db = require('./config/mongoose');
